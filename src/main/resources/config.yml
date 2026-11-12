@@ -1,0 +1,142 @@
+tags:
+  test:
+    - "minecraft:netherite_sword"
+    - "minecraft:diamond_sword"
+    - "minecraft:netherite_shovel"
+    - "minecraft:mace"
+    - "minecraft:diamond_pickaxe"
+
+enchantments:
+  test:
+    name: "<light_purple>Test"
+    max_level: 5
+    weight: 10
+    anvil_cost: 10
+    min_cost:
+      base: 1
+      per_level: 5
+    max_cost:
+      base: 30
+      per_level: 5
+    incompatible:
+      - sharpness
+      - efficiency
+    supported_items:
+      - "#echoitems:test"
+    primary_items:
+      - "#echoitems:test"
+    properties:
+      curse: true
+      enchantable: false
+      tradeable: false
+      treasure: false
+      on_random_loot: false
+      on_traded_equipment: false
+      on_mob_equipment: false
+    active_slots:
+      - mainhand
+    effects:
+      attributes:
+        - attribute: attack_speed
+          key: "echoitems:test_attack_speed"
+          amount:
+            base: 0.5
+            add_per_level: 0.25
+          # allowed operations: add_value, add_multiplied_bae, add_multiplied_total
+          operation: add_value
+
+items:
+  test:
+    itemname: "test"
+    # only customname and name supports placeholders
+    customname: "<light_purple>Test Sword"
+    displayname: "test"
+    name: "test of %player_name%" # alias for customname
+    material: diamond_sword
+    lore:
+      - "player %player_name%"
+      - "line with %placeholder%"
+      - "line with ${testmodifier, integer, 1='cerial', 2='lx', else='emir'}"
+    enchantments:
+      sharpness: 10
+      echoitems:test: 5
+    modifiers:
+      testmodifier: 0
+    flags:
+      - hide_enchants
+    attributes:
+      - attribute: attack_speed
+        key: "test:attack_speed"
+        amount: 10.0
+        operation: add_number
+        slot: chest
+    has_creation_time: true
+    model: "diamond_pickaxe"
+    glint_override: true
+    max_stack_size: 99
+    rarity: common
+    tooltip: "test:test_tooltip"
+    glider: true
+    equippable:
+      slot: chest
+      model: diamond_chestplate
+      sound: "entity.smth.smth"
+      shearable: true
+      shear_sound: "entity.smth.smth"
+      damage_on_hurt: true
+      dispensable: true
+      swappable: true
+    food:
+      can_always_eat: true
+      nutrition: 1
+      saturation: 1
+    consumable:
+      seconds: 5
+      has_particles: false
+      sound: "entity.smth.smth"
+      animation: block
+    tool:
+      damage_per_block: 1
+      default_speed: 0
+      can_destroy_in_creative: false
+      rules:
+        - speed: 5.5
+          correct_for_drops: true
+          blocks: # list of materials or tag
+            - diamond_block
+    use:
+      cooldown:
+        group: "tests"
+        seconds: 10
+      remainder: diamond_sword # id of custom item or vanilla
+    damage:
+      unbreakable: true
+      max: 100
+      current: 50
+    trim:
+      pattern: eye
+      material: amethyst
+    nbt:
+      - key: "nbtkey"
+        value: 1
+    recipe:
+      crafting:
+        - shape:
+            - aba
+            - bcb
+            - aba
+          ingredients:
+            a: diamond_block
+            b: netherite_ingot
+            c: nether_star
+      smithing:
+        - template: diamond
+          base: self
+          addition: netherite_ingot
+          result: netherite_block
+          copy_data: true
+      furnace:
+        - input: self
+          result: diamond_block
+          experience: 200
+          time: 100
